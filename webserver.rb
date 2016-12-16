@@ -1,13 +1,18 @@
 require "socket"
 require "tk" #sudo apt-get install libtcltk-ruby
+require "timeout"
 
-def gui
+def init_gui
+
+  @status=false
+
   p_server = proc {server}
   p_log = proc {viewlog}
 
   windows = TkRoot.new do
     title __FILE__.gsub(File.extname(__FILE__),"")
   end
+
   @portText = TkLabel.new(windows) {
     text "Port:"
     width 8
@@ -31,16 +36,30 @@ def gui
     command p_log
   }
   @text = Tk::Tile::Notebook.new(windows){
-    width 50
-    height 10
+    width 320
+    height 110
     grid('row'=>1, 'column'=>0, 'columnspan'=>2)
   }
-  f1 = TkFrame.new(@text){
-    width 50
-    height 10
-  }
 
-  @text.add f1, :text => 'Status', :state =>'disabled'
+  f1 = TkFrame.new(@text)
+  f2 = TkFrame.new(@text)
+
+  @text.add f1, :text => 'Status'
+  @text.add f2, :text => 'Log'
+
+  @statuslabel = TkLabel.new(f1){
+    text "Welcome to Server !!\nIt's off Now"
+    font TkFont.new('times 12 bold')
+    grid('row'=>0,'column'=>0)
+    justify 'left'
+    #pack("side" => "right",  "padx"=> "50", "pady"=> "50")
+  }
+  @loglabel = TkLabel.new(f2){
+    text ""
+    font TkFont.new('times 10 bold')
+    grid('row'=>0,'column'=>0)
+    justify 'left'
+  }
 
   Tk.mainloop
 end
@@ -63,7 +82,7 @@ def contentType(path)
 end
 
 def log(logStr)
-
+  @loglabel.text = logStr
   logStr = "#{logStr}-----------------------------------------------\n\n"
   logfilename="#{__FILE__.gsub(File.extname(__FILE__),"")}.log"
 
@@ -72,7 +91,6 @@ def log(logStr)
   else
     logfile=File.new("./#{logfilename}","w")
   end
-
   logfile.puts logStr
   logfile.close
 
@@ -93,17 +111,46 @@ def viewlog
   end
 end
 
+def port_used?(port)
+  server = TCPServer.new('127.0.0.1', port)
+  server.close
+  return true
+rescue Errno::EADDRINUSE
+  return false
+  retry
+end
+
+def check_privilge?
+  if Process.uid==0
+    return true
+  else
+    return false
+  end
+end
+
 def server
-  if @status==false
+
+  if @portField.value.to_i<=0 && @status==false
+    @statuslabel.text="Error !!\nWrong Port Number"
+
+  elsif @status==false && @portField.value.to_i<1024 && !check_privilge?
+    @statuslabel.text = "Error !!\nPermission Deny\nPort 1~1023 should be with Sudo Privilege"
+
+  elsif @status==false && !port_used?(@portField.value.to_i)
+    @statuslabel.text = "Error !!\nThe Port is used !!"
+
+  elsif @status==false
+    puts "1234"
     Thread.start do
       startinfo
       @webserver = TCPServer.new('localhost', @portField.value.to_i)
       @status=true
+      @statuslabel.text = "Server On !!\nStarting on Port : #{@portField.value.to_i}"
       @startstopbutton.text="Stop"
       base_dir = Dir.new(".")
       logStr=String.new
       while (session = @webserver.accept)
-        Thread.start do
+        #Thread.start do
           request=session.gets
           puts "Connection from #{session.peeraddr[2]} at #{session.peeraddr[3]}"
           logStr =  "Connection: #{session.peeraddr[2]} (#{session.peeraddr[3]})\n"
@@ -152,7 +199,7 @@ def server
           session.close
           puts "session close"
         end
-      end
+      #end
     end
 
   else
@@ -160,7 +207,8 @@ def server
     @status=false
     @startstopbutton.text="Start"
   end
-
 end
-@status=false
-gui
+
+
+
+init_gui
