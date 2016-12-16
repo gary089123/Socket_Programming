@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>X_X</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+                $(document).ready(function(){
+                    $('.l').click(function(response){
+                        if($(this).attr('fill') == "red")
+                            $(this).attr('fill',"green");
+                        else
+                            $(this).attr('fill',"red");
+                    });
+                });
+                setInterval(function(){console.log("ad")},1000);
+            </script>
+            <style>
+                .circle{
+                    border-radius: 50%;
+                    width:500px;
+                    height:500px;
+                    background: #30cc23;
+                }
+            </style>
+    </head>
+    <body>
+        <div>
+            <svg width="100%" height="100%">
+                <circle class="l" cx="12.5%" cy="50%" r = "10%" fill="red" >
+                    
+                </circle><circle class="l" cx="37.5%" cy="50%" r = "10%" fill="red" >
+                    
+                </circle><circle class="l" cx="62.5%" cy="50%" r = "10%" fill="red" >
+                    
+                </circle><circle class="l" cx="87.5%" cy="50%" r = "10%" fill="red" >
+                    
+                </circle>
+            </svg>
+            
+        </div>
+    </body>
+</html>
