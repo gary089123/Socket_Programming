@@ -140,7 +140,6 @@ def server
     @statuslabel.text = "Error !!\nThe Port is used !!"
 
   elsif @status==false
-    puts "1234"
     Thread.start do
       startinfo
       @webserver = TCPServer.new('localhost', @portField.value.to_i)

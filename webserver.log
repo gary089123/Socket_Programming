@@ -1,0 +1,63 @@
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:42:33
+Request   : GET /C.html HTTP/1.1
+Response  : HTTP/1.1 200/OK  Content-type: text/html
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:42:33
+Request   : GET /kabo.gif HTTP/1.1
+Response  : HTTP/1.1 200/OK  Content-type: image/gif
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:42:33
+Request   : GET /float.jpg HTTP/1.1
+Response  : HTTP/1.1 200/OK  Content-type: image/jpeg
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:43:01
+Request   : GET /C.html HTTP/1.1
+Response  : HTTP/1.1 200/OK  Content-type: text/html
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:43:01
+Request   : GET /kabo.gif HTTP/1.1
+Response  : HTTP/1.1 200/OK  Content-type: image/gif
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:43:27
+Request   : GET / HTTP/1.1
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:43:30
+Request   : GET / HTTP/1.1
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:43:36
+Request   : GET /C.html HTTP/1.1
+Response  : HTTP/1.1 200/OK  Content-type: text/html
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:43:36
+Request   : GET /float.jpg HTTP/1.1
+Response  : HTTP/1.1 200/OK  Content-type: image/jpeg
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:43:36
+Request   : GET /kabo.gif HTTP/1.1
+Response  : HTTP/1.1 200/OK  Content-type: image/gif
+-----------------------------------------------
+
+Connection: 127.0.0.1 (127.0.0.1)
+Time      : 2016/12/16 22:56:08
+Request   : GET / HTTP/1.1
+-----------------------------------------------
+
