@@ -144,7 +144,7 @@ def server
       startinfo
       @webserver = TCPServer.new('localhost', @portField.value.to_i)
       @status=true
-      @statuslabel.text = "Server On !!\nStarting on Port : #{@portField.value.to_i}"
+      @statuslabel.text = "Server On !! (>﹏<)\nStarting on Port : #{@portField.value.to_i}"
       @startstopbutton.text="Stop"
       base_dir = Dir.new(".")
       logStr=String.new
@@ -205,6 +205,7 @@ def server
     @webserver.close
     @status=false
     @startstopbutton.text="Start"
+    @statuslabel.text = "Server Off (￣Д￣)ﾉ"
   end
 end
 
